@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch 2016-2019</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Google Fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <!-- Custom CSS -->
+    <style>
+        /* Common styles for both mobile and desktop */
+        body {
+            background-color: #3e4095;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 100px;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff8a00, #e52e71, #00c6fb, #3e4095);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.5s;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .login-container:hover {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-page {
+            display: none;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f30d05;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px; /* Adjust the font size as needed */
+    display: none;
+}
+
+.scroll-to-top:hover {
+    background-color: #000;
+}
+
+
+
+        .main-page {
+            display: none;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-image: url('photo3.jpg'); /* Replace with your background image */
+            background-size: cover;
+            color: #0fa774;
+            font-weight: lighter;
+            font-style: italic;
+        }
+
+        .friend-section {
+            margin: 20px;
+        }
+
+        .friend-card {
+            margin: 10px;
+            height: 450px;
+            width: 30%;
+            background-color: #fff;
+            box-shadow: 0 0px 20px rgba(5, 212, 240, 0.89);
+            box-sizing: border-box;
+            float: left;
+        }
+
+        .friend-card:nth-child(3n+1) {
+            margin-right: 0;
+        }
+
+        .friend-photo {
+            height: 350px;
+            width: 100%;
+            background-size: cover;
+            border: 4px solid purple;
+        }
+
+        .friend-name {
+            padding: 10px;
+            text-align: center;
+            font-style: italic;
+            color: darkslategray;
+            border: #0fa774 4px solid;
+        }
+
+        .friend-link {
+            text-align: center;
+            border: #01e715 4px solid;
+        }
+
+        .no-photo-message {
+            text-align: center;
+            padding: 20px;
+            color: red;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            width: 100%;
+        }
+
+        .a-border {
+            border: #0fa774 2px solid;
+        }
+
+        /* Mobile layout */
+        @media only screen and (max-width: 767px) {
+            .friend-card {
+                width: calc(100% - 20px); /* 1 friend in a row with some margin */
+            }
+        }
+
+        /* Desktop layout */
+        @media only screen and (min-width: 768px) {
+            .friend-card {
+                width: calc(33.33% - 20px); /* 3 friends in a row with some margin */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container">
+        <h2 style="text-align: center; margin-bottom: 20px;">Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="authenticate()">Login</button>
+        </form>
+    </div>
+
+    <!-- Main Page -->
+    <div class="main-page" id="mainPage">
+        <div class="header">
+            <h1>2016-2019 BATCH</h1>
+            <h2>H . H . S.</h2>
+        </div>
+
+        <!-- Friend Section -->
+        <div class="friend-section">
+            <div class="search-bar">
+                <input type="text" class="form-control search-input" placeholder="Search friend by name" oninput="filterFriends()">
+            </div>
+
+            <div class="row" id="friendContainer">
+                <!-- Friend cards will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Photo Section -->
+        <!-- Photo Section -->
+  <div class="section" id="photoSection">
+    <!-- Photo content here -->
+    <h3>2016-2019 Batch meet-up photo</h3>
+    <!-- Placeholder for adding more photos dynamically -->
+    <div class="row">
+        <div class="col-md-4 a-border">
+            <img src="photo1.jpg" alt="Photo 1" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo2.jpg" alt="Photo 2" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo3.jpg" alt="Photo 3" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo4.jpg" alt="Photo 4" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo5.jpg" alt="Photo 5" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo6.jpg" alt="Photo 6" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo7.jpg" alt="Photo 7" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo8.jpg" alt="Photo 8" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo9.jpg" alt="Photo 9" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo10.jpg" alt="Photo 10" class="img-fluid">
+        </div>
+        <div class="col-md- a-border">
+            <img src="photo11.jpg" alt="Photo 11" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo12.jpg" alt="Photo 12" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo13.jpg" alt="Photo 13" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo14.jpg" alt="Photo 14" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo15.jpg" alt="Photo 15" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo16.jpg" alt="Photo 16" class="img-fluid">
+        </div>
+        <div class="col-md-4 a-border">
+            <img src="photo17.jpg" alt="Photo 17" class="img-fluid">
+        </div>
+    </div>
+</div>
+           <!-- video section -->
+           <div class="section" id="videoSection">
+            <!-- Video content here -->
+            <h3> meet-up Video </h3>
+            <!-- Placeholder for adding more videos dynamically -->
+            <div class="row">
+                <div class="col-md-4 a-border">
+                    <video width="100%" height="200" controls>
+                        <source src="video1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="col-md-4 a-border">
+                    <video width="100%" height="200" controls>
+                        <source src="video2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="col-md-4 a-border">
+                    <video width="100%" height="200" controls>
+                        <source src="video3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div> 
+
+
+        <!-- Scroll to Top Button -->
+        <button class="btn btn-danger scroll-to-top" onclick="scrollToTop()">&#8593;</button>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <p>&copy;2023 devlope&design by kmc7t09</p>
+        </div>
+    </div>
+
+    <!-- JavaScript and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Mock data for testing (replace this with your actual data)
+        var friendsData = [
+{name: "Biswaranjan Samantaray",
+photo: "badal.jpg",
+instagram: "https://www.instagram.com/badalsamantray?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/badal.samantray.52?mibextid=9R9pXO",
+github:"",
+linkeden:"",
+},
+{
+name: "Somanath Sahoo",
+photo: "somu.jpg",
+instagram: "https://www.instagram.com/mr_somu2003?igsh=MzRlODBiNWFlZA==",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "Nirupama Sahoo",
+photo: "reema.jpg",
+instagram: "https://www.instagram.com/_.reema143._?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/profile.php?id=100041659124484&mibextid=9R9pXO",
+//   github:"",
+//   linkeden:"",
+},
+{
+name: "Pujarani Jena",
+photo: "puja.jpg",
+//   instagram: "",
+//   facebook:"",
+//   github:"",
+//   linkeden:"",
+},
+{
+name: "Swarnaprava Swain",
+photo: "sini.jpg",
+instagram: "https://www.instagram.com/swarnaprava2835?igsh=MzRlODBiNWFlZA==",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Sujata Betal(N/A)",
+photo: "sujata.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Deepak Kandi",
+photo: "deepak.jpg",
+instagram: "https://www.instagram.com/1x.dipaka.03?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/dipak.kandi.12?mibextid=9R9pXO",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Prashanta Bhoi(N/A)",
+photo: "tutu.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Sumanta ku Sethi",
+photo: "hari.jpg",
+instagram: "https://www.instagram.com/sumant_kumar_yz?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/sumantkumar.sethi.5?mibextid=9R9pXO",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Nilamani Khotei(N/A)",
+photo: "hatia.jpg ",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Abinash Pani",
+photo: "tuta.jpg",
+instagram: "https://www.instagram.com/paniabinash867?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/abinash.pani.948?mibextid=9R9pXO",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Santosh Swain(N/A)",
+photo: "butu.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Mitali Pradhan(NA)",
+photo: "mitali.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Purnima Mallick(N/A)",
+photo: "purnima.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Santosh Behera",
+photo: "papu.jpg",
+instagram: "https://www.instagram.com/santosh_behera_8956?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/profile.php?id=100070268379905&mibextid=9R9pXO",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Somantah Mallick(N/A)",
+photo: "kunu.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Ramakanta Mallick(N/A)",
+photo: "papuni.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Biswanath Mallick(N/A)",
+photo: "kalia.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Rasmita Barik(N/A)",
+photo: "megha.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Puja Jena(N/A)",
+photo: "puja.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Namita Sahoo(married)N/A",
+photo: "namita.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Jasoda Dalei(married)N/A",
+photo: "jasoda.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Arpita jena(N/A)",
+photo: "arpita.jpg",
+// instagram: "",
+// facebook:"",
+// github:"",
+// linkeden:"",
+},
+{
+name: "Biswajit Bhoi",
+photo: "bisu.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "Gautam Swain(N/A)",
+photo: "sibuna.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "Ranjit Sahoo(N/A)",
+photo: "ranjit.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "Bhabani Barik",
+photo: "bhabai.jpg",
+instagram: "https://www.instagram.com/kastly__badal?igsh=MzRlODBiNWFlZA==",
+facebook:"https://www.facebook.com/kubulu.khotei?mibextid=9R9pXO",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend2.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "NOT AVAILABLE",
+photo: "friend1.jpg",
+instagram: "",
+facebook:"",
+github:"",
+linkeden:"",
+},
+{
+name: "Kubul",
+photo: "kubul.jpg",
+instagram: "https://www.instagram.com/kmc7t09?igsh=NTc4MTIwNjQ2YQ==",
+facebook:"",
+github:"https://github.com/KMc7T09",
+linkeden:"https://www.linkedin.com/in/ramesh-khotei",
+},
+
+            // Add more friends as needed
+        ];
+
+        // Load friends when the page is authenticated
+        function loadFriends() {
+            var friendContainer = document.getElementById("friendContainer");
+
+            // Loop through the friendsData array and create friend cards
+            friendsData.forEach(function(friend) {
+                var friendCard = document.createElement("div");
+                friendCard.classList.add("col-md-4", "friend-card");
+
+                var cardContent = `
+                    <div class="card">
+                        ${friend.photo
+                      ? `<div class="friend-photo" style="background-image: url('${friend.photo}')"></div>`
+                       : `<div class="no-photo-message">Photo Not Available</div>`}
+                        <div class="friend-name">
+                            <h5>${friend.name}</h5>
+                        </div>
+                        <div class="friend-link">
+                            <a href="${friend.instagram}" target="_blank">
+                                <img src="instagram-icon.png" alt="Instagram" width="30" height="30">
+                            </a>
+                            <a href="${friend.facebook}" target="_blank">
+                                <img src="facebook-icon.png" alt="Facebook" width="30" height="30">
+                            </a>
+                            <a href="${friend.linkedin}" target="_blank">
+                                <img src="linkedin-icon.png" alt="LinkedIn" width="30" height="30">
+                            </a>
+                            <a href="${friend.github}" target="_blank">
+                                <img src="github-icon.png" alt="GitHub" width="30" height="30">
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                // Append the friendCard to the friendContainer
+                friendCard.innerHTML = cardContent;
+                friendContainer.appendChild(friendCard);
+            });
+        }
+
+        // Authentication function
+        function authenticate() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Check if username and password match
+            if (username === "2016-2019" && password === "kmc7t09") {
+                // Hide login page and show main page
+                document.getElementById("mainPage").style.display = "block";
+                document.querySelector(".login-container").style.display = "none";
+
+                // Load friends data
+                loadFriends();
+            } else {
+                alert("Invalid credentials. Please try again.");
+            }
+        }
+
+        // Search friends function
+        function filterFriends() {
+            var input = document.querySelector('.search-input');
+            var filter = input.value.toUpperCase();
+            var friends = document.getElementById("friendContainer").getElementsByClassName('friend-card');
+
+            for (var i = 0; i < friends.length; i++) {
+                var name = friends[i].getElementsByClassName('friend-name')[0].getElementsByTagName('h5')[0];
+                if (name.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    friends[i].style.display = "";
+                } else {
+                    friends[i].style.display = "none";
+                }
+            }
+        }
+
+        // Scroll-to-top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide scroll-to-top button on scroll
+        window.onscroll = function() {
+            var scrollButton = document.querySelector('.scroll-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollButton.style.display = "block";
+            } else {
+                scrollButton.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
